@@ -14,11 +14,13 @@ class CreateShindansTable extends Migration
     public function up()
     {
         Schema::create('shindans', function (Blueprint $table) {
-            $table-> string('id',36)-> primary();
-            $table->timestamps();
+            $table->string('id',36)-> primary();
+            $table->timestamps(); 
+            $table->string('name');
             $table->string('emoji');
             $table->string('author');
-            $table->stirng('unit');
+            $table->string('unit');
+            $table->integer('height');
         });
     }
 

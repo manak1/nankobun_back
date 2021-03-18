@@ -17,7 +17,8 @@ class CreateShindansTable extends Migration
             $table-> string('id',36)-> primary();
             $table->timestamps();
             $table->string('emoji');
-
+            $table->string('author');
+            $table->stirng('unit');
         });
     }
 

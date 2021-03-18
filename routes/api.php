@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/shindan', 'ShindanController@create');
+Route::post('shindan', 'ShindanController@create');
+Route::get('shindan/search', 'ShindanController@find');
+Route::get('shindan/{id}', 'ShindanController@get');

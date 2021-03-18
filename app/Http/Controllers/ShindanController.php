@@ -17,23 +17,48 @@ class ShindanController extends Controller
             'author' => 'required | max:20',
             'unit' => 'required | max:1',
             'height' => 'required | max:1000',
-            ]);
-            
-            if ($validator->fails()) {
-                return response()->json([
-                    'errors' => $validator->errors()
-                ], 400);
-            }
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 400);
+        }
 
         $shindan = new Shindan();
-        $shindan-> emoji = $request -> emoji;
-        $shindan-> name = $request -> name;
-        $shindan-> author = $request -> author;
-        $shindan-> unit = $request -> unit;
-        $shindan-> height = $request -> height;
+        $shindan->emoji = $request->emoji;
+        $shindan->name = $request->name;
+        $shindan->author = $request->author;
+        $shindan->unit = $request->unit;
+        $shindan->height = $request->height;
         $shindan->save();
-        return response()-> json([
+        return response()->json([
             'shindan' => $shindan
+        ], 200);
+    }
+
+    public function get($id)
+    {
+        $shindan = Shindan::find($id);
+        return response()->json([
+            'shindan' => $shindan
+        ], 200);
+    }
+
+    public function find(Request $request)
+    {   
+        $keyword= $request->keyword;
+        if(!$keyword) {
+            $shindans = Shindan::all()->take(10);
+            return response([
+                'shindans' => $shindans
+            ],200);
+        }
+
+        $query = Shindan::query();
+        $shindans = $query->where('name', 'like', '%'.$keyword.'%')->take(10)->get();
+        return response([
+            'shindans' => $shindans
         ],200);
     }
 }

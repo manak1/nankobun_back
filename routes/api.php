@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::post('shindan', 'ShindanController@create');
 Route::get('shindan','ShindanController@index');
 Route::get('shindan/search', 'ShindanController@find');

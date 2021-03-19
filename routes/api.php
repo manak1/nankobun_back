@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('shindan', 'ShindanController@create');
+Route::get('shindan','ShindanController@index');
 Route::get('shindan/search', 'ShindanController@find');
 Route::get('shindan/{id}', 'ShindanController@get');

@@ -9,6 +9,22 @@ use App\Shindan;
 
 class ShindanController extends Controller
 {
+
+    public function index(Request $request) {
+        $offset = $request->offset;
+        if($offset) {
+            $shindans = Shindan::latest()->offset($offset)->take(10)->get();
+            return response([
+                'shindans'=> $shindans
+            ], 200);
+        }
+        $shindans = Shindan::latest()->take(10)->get();
+        return response([
+            'shindans'=> $shindans
+        ], 200);
+        
+    }
+
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
